@@ -3,7 +3,7 @@ import './style.css'
 import * as THREE from 'three';
 
 // We import controls for mouse movement
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const scene = new THREE.Scene()
 
@@ -21,18 +21,18 @@ camera.position.setX(-3);
 renderer.render(scene, camera)
 
 const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 )
-const material = new THREE.MeshStandardMaterial( {color: 0xFF6347 } );
+const material = new THREE.MeshStandardMaterial( {color: 0x5f7185 } );
 const torus = new THREE.Mesh( geometry, material)
 
 scene.add(torus)
 
 // Positions the light source
 const pointLight = new THREE.PointLight(0xffffff)
-pointLight.position.set(5, 5, 5)
+pointLight.position.set(-10, 0, 30)
 
 // Produces light in all directions
 const ambientLight = new THREE.AmbientLight(0xffffff)
-scene.add(pointLight, ambientLight)
+scene.add(pointLight)
 
 // Helps show where the light is coming from
 // const lightHelper = new THREE.PointLightHelper(pointLight)
@@ -77,8 +77,10 @@ const saturn = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ 
     map: saturnTexture,
     normalMap: saturnTexture
-  })
+  }),
+  
 )
+saturn.add(ambientLight)
 scene.add(saturn)
 
 saturn.position.z = 30;
@@ -90,15 +92,15 @@ olly.position.x = 2
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
   saturn.rotation.x += 0.05
-  saturn.rotation.y += 0.075;
+  saturn.rotation.y += 0.015;
   saturn.rotation.z += 0.05
 
-  olly.rotation.y += 0.05;
-  olly.rotation.z += 0.05;
+  olly.rotation.y += 0.03;
+  olly.rotation.z += 0.03;
 
-  camera.position.z = t * -0.01;
+  camera.position.z = t * -0.011;
   camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.00065;
+  camera.rotation.y = t * -0.00055;
 
 }
 
@@ -108,9 +110,9 @@ moveCamera()
 function animate() {
   requestAnimationFrame( animate )
 
-  torus.rotation.x += 0.005;
-  torus.rotation.y += 0.02;
-  torus.rotation.z += 0.05;
+  torus.rotation.x += 0.02;
+  torus.rotation.y += 0.005;
+  torus.rotation.z += 0.01;
 
   saturn.rotation.x += 0.005;
 
