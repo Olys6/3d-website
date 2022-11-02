@@ -2,7 +2,7 @@ import './style.css'
 
 import * as THREE from 'three';
 
-// We import controls for mouse movement
+//? We import controls for mouse movement
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const scene = new THREE.Scene()
@@ -26,22 +26,23 @@ const torus = new THREE.Mesh( geometry, material)
 
 scene.add(torus)
 
-// Positions the light source
+//? Positions the light source
 const pointLight = new THREE.PointLight(0xffffff)
 pointLight.position.set(-10, 0, 30)
 
-// Produces light in all directions
+//? Produces light in all directions
 const ambientLight = new THREE.AmbientLight(0xffffff)
 scene.add(pointLight)
 
-// Helps show where the light is coming from
+//? Helps show where the light is coming from
 // const lightHelper = new THREE.PointLightHelper(pointLight)
 // const gridHelper = new THREE.GridHelper(200, 50)
 // scene.add(lightHelper, gridHelper)
 
-// Defines mouse controls
+//? Defines mouse controls
 // const controls = new OrbitControls(camera, renderer.domElement);
 
+//? Adding little white stars randomly throughout the map
 function addStars() {
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
   const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
@@ -53,7 +54,9 @@ function addStars() {
   scene.add(star)
 }
 
-Array(200).fill().forEach(addStars)
+//? Number of stars we want to add to the map
+const numberOfStars = 200;
+Array(numberOfStars).fill().forEach(addStars)
 
 
 const spaceTexture = new THREE.TextureLoader().load('assets/space.jpg');
@@ -61,7 +64,7 @@ scene.background = spaceTexture
 
 const ollyPFP = new THREE.TextureLoader().load('assets/Avatar_ghostrobe5_320x320px.png')
 
-// Avatar / profile picture
+//? Avatar / profile picture
 const olly = new THREE.Mesh(
   new THREE.BoxGeometry(3, 3, 3),
   new THREE.MeshBasicMaterial({ map: ollyPFP })
@@ -69,7 +72,7 @@ const olly = new THREE.Mesh(
 
 scene.add(olly)
 
-// Moon
+// Planet
 const saturnTexture = new THREE.TextureLoader().load('assets/saturn.png')
 
 const saturn = new THREE.Mesh(
@@ -77,9 +80,7 @@ const saturn = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ 
     map: saturnTexture,
     normalMap: saturnTexture
-  }),
-  
-)
+  }))
 saturn.add(ambientLight)
 scene.add(saturn)
 
@@ -91,9 +92,9 @@ olly.position.x = 2
 
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
-  saturn.rotation.x += 0.05
-  saturn.rotation.y += 0.015;
-  saturn.rotation.z += 0.05
+  // saturn.rotation.x += 0.05
+  // saturn.rotation.y += 0.015;
+  // saturn.rotation.z += 0.05
 
   olly.rotation.y += 0.03;
   olly.rotation.z += 0.03;
@@ -101,7 +102,6 @@ function moveCamera() {
   camera.position.z = t * -0.011;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.00055;
-
 }
 
 document.body.onscroll = moveCamera;
