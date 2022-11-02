@@ -93,12 +93,12 @@ function moveCamera() {
   saturn.rotation.y += 0.075;
   saturn.rotation.z += 0.05
 
-  olly.rotation.y += 0.01;
-  olly.rotation.z += 0.01;
+  olly.rotation.y += 0.05;
+  olly.rotation.z += 0.05;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.0002;
+  camera.rotation.y = t * -0.00065;
 
 }
 
@@ -108,9 +108,9 @@ moveCamera()
 function animate() {
   requestAnimationFrame( animate )
 
-  torus.rotation.x += 0.01;
-  torus.rotation.y += 0.005;
-  torus.rotation.z += 0.01;
+  torus.rotation.x += 0.005;
+  torus.rotation.y += 0.02;
+  torus.rotation.z += 0.05;
 
   saturn.rotation.x += 0.005;
 
